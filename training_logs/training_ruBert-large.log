@@ -1,0 +1,60 @@
+2024-12-18 05:44:20,383 - INFO - Start model training with parameters:
+2024-12-18 05:44:20,383 - INFO - Model name: ai-forever/ruBert-large
+2024-12-18 05:44:20,384 - INFO - Tokenization max length: 256
+2024-12-18 05:44:20,385 - INFO - DataLoader batch size: 64
+2024-12-18 05:44:20,385 - INFO - Optimizer: AdamW with lr 1e-5
+2024-12-18 05:44:20,386 - INFO - Dataset cfg: extended.
+
+2024-12-18 05:44:20,386 - INFO - GOOG LUCK:)
+
+2024-12-18 05:44:23,932 - INFO - Epoch: 1.
+2024-12-18 06:47:34,322 - INFO - Train loss: 0.28217467291228504, Valid loss: 0.2493831005376295, Valid F1: 0.6279445673996257.
+2024-12-18 06:48:17,527 - INFO - Model saved.
+2024-12-18 06:48:17,528 - INFO - Epoch: 2.
+2024-12-18 07:51:29,411 - INFO - Train loss: 0.23500615805132194, Valid loss: 0.2440314388772973, Valid F1: 0.6539695102583561.
+2024-12-18 07:52:11,977 - INFO - Model saved.
+2024-12-18 07:52:11,978 - INFO - Epoch: 3.
+2024-12-18 08:55:22,770 - INFO - Train loss: 0.20693402633981525, Valid loss: 0.2471252618941981, Valid F1: 0.6675311884516196.
+2024-12-18 08:56:05,805 - INFO - Model saved.
+2024-12-18 08:56:05,805 - INFO - Epoch: 4.
+2024-12-18 09:59:17,279 - INFO - Train loss: 0.181764113050335, Valid loss: 0.2623018699426952, Valid F1: 0.6645075617785835.
+2024-12-18 09:59:17,281 - INFO - Epoch: 5.
+2024-12-18 11:02:31,385 - INFO - Train loss: 0.16235150498519416, Valid loss: 0.26639952744372003, Valid F1: 0.6633012602542193.
+2024-12-18 11:02:31,387 - INFO - Epoch: 6.
+2024-12-18 12:05:44,207 - INFO - Train loss: 0.1465960784997687, Valid loss: 0.28182867569659686, Valid F1: 0.6599971544976037.
+2024-12-18 12:05:44,209 - INFO - Early stopping.
+2024-12-18 12:11:09,087 - INFO - Validation report on validation dataset.
+2024-12-18 12:11:09,141 - INFO - Precision    recall  f1-score   support
+
+                       anger       0.53      0.55      0.54      3594
+                     disgust       0.61      0.36      0.45      1555
+                        fear       0.66      0.60      0.63      1080
+                         joy       0.57      0.71      0.63      4784
+                     sadness       0.65      0.54      0.59      2825
+                    surprise       0.49      0.51      0.50      2155
+                     neutral       0.83      0.70      0.76     15084
+
+                   micro avg       0.68      0.63      0.66     31077
+                   macro avg       0.62      0.57      0.58     31077
+                weighted avg       0.70      0.63      0.66     31077
+                 samples avg       0.67      0.66      0.65     31077
+
+2024-12-18 12:11:09,194 - INFO - Test F1-score (weighted) on validation dataset: 0.6599971544976037.
+2024-12-18 12:11:09,226 - INFO - Validation report on test dataset.
+2024-12-18 12:14:12,880 - INFO - Precision    recall  f1-score   support
+
+                       anger       0.49      0.62      0.54      1844
+                     disgust       0.57      0.31      0.40      1001
+                        fear       0.62      0.55      0.58       701
+                         joy       0.51      0.73      0.60      1853
+                     sadness       0.60      0.58      0.59      1553
+                    surprise       0.54      0.54      0.54      1064
+                     neutral       0.85      0.70      0.77      9218
+
+                   micro avg       0.68      0.65      0.66     17234
+                   macro avg       0.60      0.58      0.58     17234
+                weighted avg       0.71      0.65      0.67     17234
+                 samples avg       0.66      0.66      0.66     17234
+
+2024-12-18 12:14:12,915 - INFO - Test F1-score (weighted) on test dataset: 0.6678870423176024.
+2024-12-19 03:11:10,314 - INFO - Submission public score: 0.59791
