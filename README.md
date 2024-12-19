@@ -1,6 +1,6 @@
 # Классификация эмоций на основе текста
 
-Этот проект реализует многометочную классификацию эмоций с использованием модели ai-forever/ruBert-large. В процессе работы данные расширяются за счет датасета ru-izard-emotions, очищаются, анализируются, обучается нейронная сеть, а также выполняется предсказание эмоций.
+Этот проект реализует многометочную классификацию эмоций с использованием модели ai-forever/ruBert-large. В процессе работы данные расширяются за счет датасетов `djacon/ru-izard-emotions` и `seara/ru_go_emotions`, очищаются, анализируются, обучается нейронная сеть, а также выполняется предсказание эмоций.
 
 ---
 
@@ -22,8 +22,10 @@
 Для запуска проекта установите следующие библиотеки:
 
 ```bash
-pip install -q transformers datasets librosa torch scikit-learn matplotlib pandas
+pip install -q transformers datasets torch scikit-learn matplotlib pandas
 ```
+
+Общий список библиотек, использованных в работе над проектом, приведен в файле `requirements.txt`.
 
 ---
 
@@ -42,13 +44,13 @@ pip install -q transformers datasets librosa torch scikit-learn matplotlib panda
 
 Датасет содержит следующие метки эмоций:
 
-- `anger`
-- `disgust`
-- `fear`
-- `joy`
-- `sadness`
-- `surprise`
-- `neutral`
+- `anger` - злость
+- `disgust` - отвращение
+- `fear` - страх
+- `joy` - радость
+- `sadness` - грусть
+- `surprise` - удивление
+- `neutral` - нейтральное состояние
 
 ---
 
@@ -141,6 +143,9 @@ df.to_csv("/content/submission.csv", index=False)
 
 На неразмеченных данных:
 - Valid loss: 0.2817318362557378
+
+Kaggle best score: 0.59818
+
 
 ---
 
