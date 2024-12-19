@@ -1,6 +1,6 @@
 # Классификация эмоций на основе текста
 
-Этот проект реализует многометочную классификацию эмоций с использованием модели BERT. В процессе работы данные очищаются, анализируются, обучается нейронная сеть, а также выполняется предсказание эмоций.
+Этот проект реализует многометочную классификацию эмоций с использованием модели ai-forever/ruBert-large. В процессе работы данные расширяются за счет датасета ru-izard-emotions, очищаются, анализируются, обучается нейронная сеть, а также выполняется предсказание эмоций.
 
 ---
 
@@ -35,8 +35,7 @@ pip install -q transformers datasets librosa torch scikit-learn matplotlib panda
 .
 ├── train.csv
 ├── valid.csv
-├── content
-│   └── test_without_answers.csv
+├── test_without_answers.csv
 ```
 
 ### Метки
@@ -71,24 +70,39 @@ pip install -q transformers datasets librosa torch scikit-learn matplotlib panda
    - Удаление лишних символов
    - Нормализация пробелов
    - Удаление дубликатов
-
-Пример команды для проверки данных на пропуски:
+   - Лемматизация
+   - Удаление стоп-слов
 
 ---
 
 ## Обучение и валидация
 
-1. Определяется модель на основе `AutoModel` из библиотеки Transformers.
+1. Определяется модель на основе `CustomBertModel` из библиотеки Transformers.
 2. Токенизация датасета и подготовка DataLoader для PyTorch.
-3. Обучение модели с использованием функции ошибки `BCEWithLogitsLoss` и оптимизатора Adam.
+3. Обучение модели с использованием функции ошибки `BCEWithLogitsLoss` и оптимизатора AdamW.
 
 Пример запуска обучения:
 
 ```python
 for epoch in range(epochs):
-    print(f"Epoch: {epoch}")
-    model = train(model, criterion, optimizer, train_dataloader)
-    val_outputs, val_targets = validation(model, criterion, valid_dataloader)
+    print(f"Epoch: {epoch+1}")
+    train_loss = train(model, criterion, optimizer, scheduler, train_dataloader)
+    val_loss, val_outputs, val_targets = validation(model, criterion, valid_dataloader)
+
+    # Вычисление F1-score
+    val_f1 = f1_score(val_targets, (np.array(val_outputs) > 0.5).astype(int), average='weighted')
+    print(f"Train loss: {train_loss}, Valid loss: {val_loss}, Valid F1: {val_f1}")
+
+    # Ранняя остановка
+    if val_f1 > best_f1:
+        best_f1 = val_f1
+        patience_counter = 0
+        torch.save(model.state_dict(), 'best_model.pt')
+    else:
+        patience_counter += 1
+        if patience_counter >= patience:
+            print("Early stopping")
+            break
 ```
 
 ---
@@ -122,8 +136,8 @@ df.to_csv("/content/submission.csv", index=False)
 
 ## Результаты
 
-На валидационных данных при обучении в течение трех эпох получили значение:
-- Valid loss: 0.23307764687958885
+На валидационных данных при обучении в течение пяти эпох получили значение:
+- Valid loss: 0.26827253162457226
 
 На неразмеченных данных:
 - Valid loss: 0.2817318362557378
